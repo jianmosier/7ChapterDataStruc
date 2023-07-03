@@ -3,29 +3,34 @@
 #include<vector>
 
 using namespace std;
-
-
-
 class Solution {
 public:
-    vector<int> sortArray(vector<int>& nums) {
-        int len = nums.size();
-        for(int i = 0; i<len-1; i++){
-            for(int j = i+1; j<len; j++){
-                if(nums[i]>nums[j]){
-                    int temp = nums[i];
-                    nums[i] = nums[j];
-                    nums[j] = temp;
-                }
+    vector<int> leftRight(vector<int>& array) {
+        if(array.size() <= 1) return array;
+        vector<int> la, ra;
+        for(int i = 1; i < array.size(); i++){
+            if(array[i] < array[0]){
+                la.push_back(array[i]);
+            }
+            else{
+                ra.push_back(array[i]);
             }
         }
-        return nums;
+        la = leftRight(la);
+        ra = leftRight(ra);
+        la.push_back(array[0]);
+        la.insert(la.end(),ra.begin(),ra.end());
+        
+        return la;
+    }
+    vector<int> sortArray(vector<int>& nums) {
+        return leftRight(nums);
     }
 };
 
 int main(){
     Solution s;
-    vector<int> nums = {5,2,3,1};
+    vector<int> nums = {5,1,1,2,0,0};
     vector<int> result = s.sortArray(nums);
     for(int i = 0; i<result.size(); i++){
         printf("%d ",result[i]);
