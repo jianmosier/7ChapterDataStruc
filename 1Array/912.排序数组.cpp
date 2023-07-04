@@ -7,12 +7,13 @@ class Solution {
 public:
     vector<int> leftRight(vector<int>& array) {
         if(array.size() <= 1) return array;
+        int pivot = array[rand() % (array.size())]; 
         vector<int> la, ra, tempA;
-        for(int i = 1; i < array.size(); i++){
-            if(array[i] < array[0]){
+        for(int i = 0; i < array.size(); i++){
+            if(array[i] < pivot){
                 la.push_back(array[i]);
             }
-            else if(array[i] > array[0]){
+            else if(array[i] > pivot){
                 ra.push_back(array[i]);
             }
             else{
@@ -21,8 +22,6 @@ public:
         }
         la = leftRight(la);
         ra = leftRight(ra);
-        tempA = leftRight(tempA);
-        la.push_back(array[0]);
         la.insert(la.end(),tempA.begin(),tempA.end());
         la.insert(la.end(),ra.begin(),ra.end());
         
