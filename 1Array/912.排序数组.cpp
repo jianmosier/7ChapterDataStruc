@@ -1,43 +1,41 @@
-#include<stdio.h>
 #include<iostream>
+#include<stdio.h>
 #include<vector>
 
 using namespace std;
-class Solution {
+
+class Solutions{
 public:
-    vector<int> leftRight(vector<int>& array) {
-        if(array.size() <= 1) return array;
-        int pivot = array[rand() % (array.size())]; 
-        vector<int> la, ra, tempA;
-        for(int i = 0; i < array.size(); i++){
-            if(array[i] < pivot){
-                la.push_back(array[i]);
-            }
-            else if(array[i] > pivot){
-                ra.push_back(array[i]);
-            }
-            else{
-                tempA.push_back(array[i]);
+    void leftRight(vector<int>& array, int m , int n){
+        if (n - m <= 1) return;
+        int i = m, j = n;
+        int pivot = array[m + rand()%(n - m + 1)];
+        while(i<j){
+            while(array[i] < pivot) i++;
+            while(array[j] > pivot) j--;
+            if(i<j){
+                swap(array[i],array[j]);
+                i++;
+                j--;
             }
         }
-        la = leftRight(la);
-        ra = leftRight(ra);
-        la.insert(la.end(),tempA.begin(),tempA.end());
-        la.insert(la.end(),ra.begin(),ra.end());
-        
-        return la;
+        leftRight(array,m,j);
+        leftRight(array,i,n);
     }
-    vector<int> sortArray(vector<int>& nums) {
-        return leftRight(nums);
+
+    vector<int> order(vector<int>& nums){
+        leftRight(nums, 0, nums.size()-1);
+        return nums;
     }
 };
 
+
+
 int main(){
-    Solution s;
-    vector<int> nums = {5,1,1,2,0,0};
-    vector<int> result = s.sortArray(nums);
-    for(int i = 0; i<result.size(); i++){
-        printf("%d ",result[i]);
+    Solutions s;
+    vector<int> inNums = {2,0,3,0,5,5,7,9,8};
+    vector<int> outNums = s.order(inNums);
+    for(int i = 0; i < outNums.size(); i++){
+        printf("%d ", outNums[i]);
     }
-    return 0;
 }
