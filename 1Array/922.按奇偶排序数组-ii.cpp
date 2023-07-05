@@ -28,7 +28,7 @@ public:
 
 int main(){
     Solution s;
-    vector<int> inArray = {4,5,2,1,9,8,6,3};
+    vector<int> inArray = {2,3};
     vector<int> outArray;
     outArray = s.sortArrayByParityII(inArray);
     for(int i = 0; i < outArray.size(); i++){
