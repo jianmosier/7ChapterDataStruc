@@ -28,26 +28,44 @@ public:
                 morePtr->next = head;
                 morePtr = head;
             }
-            head->next = head;
+            head = head->next;
         }
         lessPtr->next = moreHead.next;
+        morePtr->next = nullptr;
         return lessHead.next;
     }
 };
 
 int main(){
     Solution s;
-    vector<int> nums = {1, 4, 3, 2, 5, 2};
-    ListNode* head = new ListNode(nums[0]);
+    vector<int> inNode = {2,4,5,9,7,8,6};
+    ListNode* head = new ListNode(inNode[0]);
     ListNode* ptr = head;
-    for(int i = 1; i < nums.size(); i++){
-        ptr->next = new ListNode(nums[i]);
-        ptr = ptr->next;
+    for(int i = 1; i < inNode.size(); i++, ptr = ptr->next){
+        ptr->next = new ListNode(inNode[i]);
     }
-    ListNode* res = s.partition(head, 3);
-    while(res){
-        cout << res->val << " ";
-        res = res->next;
+    ListNode* outList = s.partition(head, 5);
+    while(outList){
+        printf("%d ", outList->val);
+        outList = outList->next;
     }
     return 0;
 }
+
+
+// int main(){
+//     Solution s;
+//     vector<int> nums = {1, 4, 3, 2, 5, 2};
+//     ListNode* head = new ListNode(nums[0]);
+//     ListNode* ptr = head;
+//     for(int i = 1; i < nums.size(); i++){
+//         ptr->next = new ListNode(nums[i]);
+//         ptr = ptr->next;
+//     }
+//     ListNode* res = s.partition(head, 3);
+//     while(res){
+//         cout << res->val << " ";
+//         res = res->next;
+//     }
+//     return 0;
+// }
