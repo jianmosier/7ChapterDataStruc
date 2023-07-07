@@ -17,20 +17,21 @@ struct ListNode{
 
 class Solution {
 public:
-    void insertNode(ListNode* list, ListNode* ptr){
-        ListNode* tempPtr = list;
-        tempPtr->next = nullptr;
-        ptr->next = tempPtr;
-        list = list->next;
-        ptr = ptr->next;
-    }
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         ListNode dumpHead;
         ListNode* dumpPtr = &dumpHead;
+
         while(list1 != nullptr && list2 != nullptr){
-            list1->val < list2->val ? insertNode(list1,dumpPtr) : insertNode(list2,dumpPtr);
+            if (list1->val < list2->val) {
+                dumpPtr->next = list1;
+                list1 = list1->next;
+            } else {
+                dumpPtr->next = list2;
+                list2 = list2->next;
+            }
+            dumpPtr = dumpPtr->next;
         }
-        list1 == nullptr ? dumpPtr->next = list2 : dumpPtr->next = list1;
+        dumpPtr->next = (list1 == nullptr) ? list2 : list1;
         return dumpHead.next;
     }
 };
