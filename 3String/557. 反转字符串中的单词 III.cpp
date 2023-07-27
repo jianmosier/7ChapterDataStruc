@@ -1,26 +1,16 @@
 #include<iostream>
 #include<string>
+#include<algorithm>
 
 using namespace std;
 
 class Solution {
 public:
-    void reverseStr(string &s, int start, int end) {
-        end--; // Make end point to the last character of the word.
-        while (start < end) {
-            char temp = s[start];
-            s[start] = s[end];
-            s[end] = temp;
-            start++;
-            end--;
-        }
-    }
-
     string reverseWords(string s) {
         int start = 0;
         for (int end = 0; end <= s.length(); end++) {
             if (end == s.length() || s[end] == ' ') {
-                reverseStr(s, start, end);
+                reverse(s.begin() + start, s.begin() + end);
                 start = end + 1;
             }
         }
@@ -30,7 +20,7 @@ public:
 
 
 int main() {
-    string str = "Let's take LeetCode contest";
+    string str = "Let's take LeetCode cont";
     Solution s;
     string newStr = s.reverseWords(str);
     for(auto c : newStr) {
