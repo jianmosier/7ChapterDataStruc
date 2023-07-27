@@ -14,9 +14,8 @@ public:
         }
         else if(count >= 5) {
             s.push_back(mid);
-            while(count-5) {
+            for(int i = count - 5; i > 0; i--) {
                 s.push_back(low);
-                count--;
             }
         }
         else if(count == 4){
@@ -24,9 +23,8 @@ public:
             s.push_back(mid);
         }
         else {
-            while(count) {
+            for(int i = count; i > 0; i--) {
                 s.push_back(low);
-                count--;
             }
         }
     }
