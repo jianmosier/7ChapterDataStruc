@@ -22,7 +22,7 @@ public:
 };
 
 int main() {
-    int num = 3876;
+    int num = 1407;
     Solution s;
     string str = s.intToRoman(num);
     for(auto st : str) {
