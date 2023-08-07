@@ -21,7 +21,7 @@ public:
 
 int main() {
     Solution sol;
-    vector<int> nums = {3, 1, 1, 2, 2};
+    vector<int> nums = {3, 1, 2, 2};
     vector<vector<int>> result = sol.permuteUnique(nums);
 
     // 输出结果
